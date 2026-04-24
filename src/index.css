@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #F8F7F5;
+    color: #1C1917; /* stone-900 — légèrement plus chaud que slate-900 */
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 15px; /* minimum confort mobile */
+    overscroll-behavior: none;
+  }
+
+  input[type="date"] {
+    color-scheme: light;
+  }
+
+  ::-webkit-scrollbar        { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: #D6D3D1; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #A8A29E; }
+
+  /* Fraunces pour les grands chiffres et titres éditoriaux */
+  .font-serif, .font-display {
+    font-family: "Fraunces", ui-serif, Georgia, serif;
+  }
+}
+
+@layer components {
+  /* --- Gradient slider track (v2 GradientSlider) --- */
+  /* Sage → warm-neutral → terracotta */
+  .slider-gradient-track {
+    background: linear-gradient(
+      to right,
+      #4A9468 0%,      /* sage-500 */
+      #C8C0B8 50%,     /* warm stone neutral */
+      #C98A6B 100%     /* chaleur-500 */
+    );
+  }
+
+  /* Slider thumb color from CSS variable (v1 compat) */
+  input[type="range"][style*="--thumb-color"]::-webkit-slider-thumb {
+    border-color: var(--thumb-color);
+  }
+  input[type="range"][style*="--thumb-color"]::-moz-range-thumb {
+    border-color: var(--thumb-color);
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Fraunces utility classes */
+  .font-fraunces        { font-family: "Fraunces", ui-serif, Georgia, serif; }
+  .font-fraunces-italic { font-family: "Fraunces", ui-serif, Georgia, serif; font-style: italic; }
+}
+
+/* Prefers reduced motion — disable all animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
